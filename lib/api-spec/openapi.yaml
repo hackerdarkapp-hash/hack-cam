@@ -1,0 +1,131 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: Remote Technical Support API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: nodes
+    description: Connected node operations
+  - name: sessions
+    description: Active session operations
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /nodes:
+    get:
+      operationId: listNodes
+      tags: [nodes]
+      summary: List connected nodes
+      description: Returns all currently connected nodes
+      responses:
+        "200":
+          description: List of connected nodes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Node"
+
+  /sessions:
+    get:
+      operationId: listSessions
+      tags: [sessions]
+      summary: List active sessions
+      description: Returns all active support sessions
+      responses:
+        "200":
+          description: List of active sessions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Session"
+
+  /stats:
+    get:
+      operationId: getStats
+      tags: [nodes]
+      summary: Get system stats
+      description: Returns overall system statistics
+      responses:
+        "200":
+          description: System statistics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SystemStats"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    Node:
+      type: object
+      required: [id, name, status, connectedAt]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+          enum: [idle, streaming, busy]
+        connectedAt:
+          type: string
+        userAgent:
+          type: ["string", "null"]
+
+    Session:
+      type: object
+      required: [id, nodeId, expertId, startedAt, status]
+      properties:
+        id:
+          type: string
+        nodeId:
+          type: string
+        expertId:
+          type: string
+        startedAt:
+          type: string
+        status:
+          type: string
+          enum: [connecting, active, ended]
+
+    SystemStats:
+      type: object
+      required: [totalNodes, activeNodes, activeSessions, totalSessionsToday]
+      properties:
+        totalNodes:
+          type: integer
+        activeNodes:
+          type: integer
+        activeSessions:
+          type: integer
+        totalSessionsToday:
+          type: integer

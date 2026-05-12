@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="auto">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+
+    <!-- PWA primary meta -->
+    <title>Remote Ops Center</title>
+    <meta name="description" content="Smart home security camera monitoring system — monitor your cameras from anywhere." />
+    <meta name="application-name" content="Remote Ops Center" />
+    <meta name="keywords" content="security camera, remote monitoring, smart home, IoT" />
+
+    <!-- Theme / status bar -->
+    <meta name="theme-color" content="#000000" />
+    <meta name="background-color" content="#000000" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- iOS PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="RemoteOps" />
+    <link rel="apple-touch-icon" href="/icon-192.svg" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph (no Replit branding) -->
+    <meta property="og:title" content="Remote Ops Center" />
+    <meta property="og:description" content="Smart home security camera monitoring system." />
+    <meta property="og:type" content="website" />
+
+    <!-- Prevent indexing if preferred -->
+    <meta name="robots" content="noindex, nofollow" />
+
+    <!-- Monospace font — embedded so it works offline -->
+    <style>
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0; padding: 0;
+        background: #000;
+        color: #22c55e;
+        font-family: 'Courier New', Courier, monospace;
+        -webkit-tap-highlight-color: transparent;
+        overscroll-behavior: none;
+      }
+      /* iOS safe area padding */
+      #root {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
